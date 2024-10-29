@@ -28,9 +28,13 @@ public class Customer {
     }
 
     public void withdraw(double sum, String currency) {
+        // Validate the currency to ensure it matches the account's currency
         validateCurrency(currency);
 
+        // Calculate the total amount to withdraw, including any fees if the account is overdrawn
         double amountToWithdraw = calculateAmountToWithdraw(sum);
+
+        // Deduct the calculated amount from the account's balance
         account.setMoney(account.getMoney() - amountToWithdraw);
     }
 
