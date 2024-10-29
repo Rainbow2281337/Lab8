@@ -28,19 +28,33 @@ public class Customer {
     }
 
     public void withdraw(double sum, String currency) {
+        validateCurrency(currency);
+
+        double amountToWithdraw = calculateAmountToWithdraw(sum);
+        account.setMoney(account.getMoney() - amountToWithdraw);
+    }
+
+    private void validateCurrency(String currency) {
         if (!account.getCurrency().equals(currency)) {
             throw new RuntimeException("Can't extract withdraw " + currency);
         }
+    }
 
+    private double calculateAmountToWithdraw(double sum) {
         boolean isOverdrawn = account.getMoney() < 0;
         double fee = account.overdraftFee();
-        double discountFactor = (customerType == CustomerType.COMPANY && account.getType().isPremium()) ? 0.5 : 1.0;
+        double discountFactor = getDiscountFactor();
 
-        // Calculate the amount to withdraw, considering overdraft fees and discounts
-        double amountToWithdraw = sum + (isOverdrawn ? sum * fee * discountFactor : 0);
-
-        account.setMoney(account.getMoney() - amountToWithdraw);
+        return sum + (isOverdrawn ? sum * fee * discountFactor : 0);
     }
+
+    private double getDiscountFactor() {
+        if (customerType == CustomerType.COMPANY && account.getType().isPremium()) {
+            return 0.5; // 50% discount for company on premium account
+        }
+        return 1.0; // No discount
+    }
+
 
     public String getFullName() {
         return name;
