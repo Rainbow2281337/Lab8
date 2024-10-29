@@ -18,7 +18,6 @@ public class Customer {
         this.account = account;
     }
 
-    // use only to create companies
     public Customer(String name, String email, Account account, double companyOverdraftDiscount) {
         this.name = name;
         this.email = email;
@@ -28,13 +27,10 @@ public class Customer {
     }
 
     public void withdraw(double sum, String currency) {
-        // Validate the currency to ensure it matches the account's currency
         validateCurrency(currency);
 
-        // Calculate the total amount to withdraw, including any fees if the account is overdrawn
         double amountToWithdraw = calculateAmountToWithdraw(sum);
 
-        // Deduct the calculated amount from the account's balance
         account.setMoney(account.getMoney() - amountToWithdraw);
     }
 
@@ -54,9 +50,9 @@ public class Customer {
 
     private double getDiscountFactor() {
         if (customerType == CustomerType.COMPANY && account.getType().isPremium()) {
-            return 0.5; // 50% discount for company on premium account
+            return 0.5;
         }
-        return 1.0; // No discount
+        return 1.0;
     }
 
 

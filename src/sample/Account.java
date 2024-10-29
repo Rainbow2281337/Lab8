@@ -1,12 +1,18 @@
 package sample;
 
 public class Account {
+    private static final String DEFAULT_CURRENCY = "EUR";
+    private static final double DEFAULT_AMOUNT = 0.0;
 
     private String iban;
     private AccountType type;
     private int daysOverdrawn;
     private MoneyWithCurrency balance;
     private Customer customer;
+
+    public Account(AccountType type, int daysOverdrawn) {
+        this(type, daysOverdrawn, new MoneyWithCurrency(DEFAULT_AMOUNT, DEFAULT_CURRENCY));
+    }
 
     public Account(AccountType type, int daysOverdrawn, MoneyWithCurrency balance) {
         super();

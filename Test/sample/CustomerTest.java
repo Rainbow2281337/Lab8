@@ -96,13 +96,10 @@ public class CustomerTest {
     }
 
     private Customer getPersonWithAccount(boolean premium) {
-        // Використання enum для створення рахунку з вказаним типом
         AccountType accountType = premium ? AccountType.PREMIUM : AccountType.NORMAL;
 
-        // Створення об'єкта MoneyWithCurrency з сумою та валютою
         MoneyWithCurrency balance = new MoneyWithCurrency(34.0, "EUR");
 
-        // Створення рахунку з новим балансом
         Account account = new Account(accountType, 9, balance);
 
         Customer customer = getPersonCustomer(account);
@@ -111,13 +108,10 @@ public class CustomerTest {
     }
 
     private Account getAccountByTypeAndMoney(boolean premium, double money) {
-        // Використання enum для створення рахунку з вказаним типом і грошима
         AccountType accountType = premium ? AccountType.PREMIUM : AccountType.NORMAL;
 
-        // Створення об'єкта MoneyWithCurrency з переданою сумою та валютою
         MoneyWithCurrency balance = new MoneyWithCurrency(money, "EUR");
 
-        // Створення рахунку з новим балансом
         Account account = new Account(accountType, 9, balance);
         account.setIban("RO023INGB434321431241");
 
