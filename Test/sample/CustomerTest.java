@@ -74,7 +74,7 @@ public class CustomerTest {
     @Test
     public void testPrintCustomerDaysOverdrawn() throws Exception {
         Customer customer = getPersonWithAccount(false);
-        assertThat(customer.printCustomerDaysOverdrawn(), is("danix dan, IBAN: RO023INGB434321431241, Money: 34.0, Days Overdrawn: 9"));
+        assertThat(customer.printCustomerDaysOverdrawn(), is("danix dan, IBAN: RO023INGB434321431241, Money: 34.0 EUR, Days Overdrawn: 9"));
     }
 
     @Test
@@ -98,21 +98,29 @@ public class CustomerTest {
     private Customer getPersonWithAccount(boolean premium) {
         // Використання enum для створення рахунку з вказаним типом
         AccountType accountType = premium ? AccountType.PREMIUM : AccountType.NORMAL;
-        Account account = new Account(accountType, 9);
+
+        // Створення об'єкта MoneyWithCurrency з сумою та валютою
+        MoneyWithCurrency balance = new MoneyWithCurrency(34.0, "EUR");
+
+        // Створення рахунку з новим балансом
+        Account account = new Account(accountType, 9, balance);
+
         Customer customer = getPersonCustomer(account);
         account.setIban("RO023INGB434321431241");
-        account.setMoney(34.0);
-        account.setCurrency("EUR");
         return customer;
     }
 
     private Account getAccountByTypeAndMoney(boolean premium, double money) {
         // Використання enum для створення рахунку з вказаним типом і грошима
         AccountType accountType = premium ? AccountType.PREMIUM : AccountType.NORMAL;
-        Account account = new Account(accountType, 9);
+
+        // Створення об'єкта MoneyWithCurrency з переданою сумою та валютою
+        MoneyWithCurrency balance = new MoneyWithCurrency(money, "EUR");
+
+        // Створення рахунку з новим балансом
+        Account account = new Account(accountType, 9, balance);
         account.setIban("RO023INGB434321431241");
-        account.setMoney(money);
-        account.setCurrency("EUR");
+
         return account;
     }
 

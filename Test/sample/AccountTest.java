@@ -43,12 +43,22 @@ public class AccountTest {
     private Account getNormalAccount() {
         // Використання enum для створення нормального рахунку
         AccountType normal = AccountType.NORMAL;
-        return new Account(normal, 9);
+
+        // Створення об'єкта MoneyWithCurrency з нульовою сумою та валютою
+        MoneyWithCurrency balance = new MoneyWithCurrency(0.0, "EUR");
+
+        // Створення нормального рахунку
+        return new Account(normal, 9, balance);
     }
 
     private Account getPremiumAccount(int daysOverdrawn) {
         // Використання enum для створення преміум рахунку
         AccountType premium = AccountType.PREMIUM;
-        return new Account(premium, daysOverdrawn);
+
+        // Створення об'єкта MoneyWithCurrency з нульовою сумою та валютою
+        MoneyWithCurrency balance = new MoneyWithCurrency(0.0, "EUR");
+
+        // Створення преміум рахунку
+        return new Account(premium, daysOverdrawn, balance);
     }
 }
