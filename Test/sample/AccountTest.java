@@ -41,12 +41,14 @@ public class AccountTest {
     }
 
     private Account getNormalAccount() {
-        AccountType premium = new AccountType(false);
-        return new Account(premium, 9);
+        // Використання enum для створення нормального рахунку
+        AccountType normal = AccountType.NORMAL;
+        return new Account(normal, 9);
     }
 
     private Account getPremiumAccount(int daysOverdrawn) {
-        AccountType normal = new AccountType(true);
-        return new Account(normal, daysOverdrawn);
+        // Використання enum для створення преміум рахунку
+        AccountType premium = AccountType.PREMIUM;
+        return new Account(premium, daysOverdrawn);
     }
 }

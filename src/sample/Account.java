@@ -86,4 +86,9 @@ public class Account {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
+
+    public String getAccountSummary() {
+        return "IBAN: " + iban + ", Money: " + money + ", Days Overdrawn: " + daysOverdrawn;
+    }
+
 }

@@ -74,7 +74,7 @@ public class CustomerTest {
     @Test
     public void testPrintCustomerDaysOverdrawn() throws Exception {
         Customer customer = getPersonWithAccount(false);
-        assertThat(customer.printCustomerDaysOverdrawn(), is("danix dan Account: IBAN: RO023INGB434321431241, Days Overdrawn: 9"));
+        assertThat(customer.printCustomerDaysOverdrawn(), is("danix dan, IBAN: RO023INGB434321431241, Money: 34.0, Days Overdrawn: 9"));
     }
 
     @Test
@@ -96,7 +96,8 @@ public class CustomerTest {
     }
 
     private Customer getPersonWithAccount(boolean premium) {
-        AccountType accountType = new AccountType(premium);
+        // Використання enum для створення рахунку з вказаним типом
+        AccountType accountType = premium ? AccountType.PREMIUM : AccountType.NORMAL;
         Account account = new Account(accountType, 9);
         Customer customer = getPersonCustomer(account);
         account.setIban("RO023INGB434321431241");
@@ -106,7 +107,8 @@ public class CustomerTest {
     }
 
     private Account getAccountByTypeAndMoney(boolean premium, double money) {
-        AccountType accountType = new AccountType(premium);
+        // Використання enum для створення рахунку з вказаним типом і грошима
+        AccountType accountType = premium ? AccountType.PREMIUM : AccountType.NORMAL;
         Account account = new Account(accountType, 9);
         account.setIban("RO023INGB434321431241");
         account.setMoney(money);

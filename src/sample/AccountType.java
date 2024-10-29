@@ -1,18 +1,21 @@
 package sample;
 
-public class AccountType {
-    private boolean premium;
+public enum AccountType {
+    NORMAL(false),
+    PREMIUM(true);
 
-    AccountType(boolean premium) {
-        this.premium = premium;
+    private final boolean isPremium;
+
+    AccountType(boolean isPremium) {
+        this.isPremium = isPremium;
     }
 
     public boolean isPremium() {
-        return premium;
+        return isPremium;
     }
 
     @Override
     public String toString() {
-        return premium ? "premium" : "normal";
+        return isPremium ? "premium" : "normal";
     }
 }
