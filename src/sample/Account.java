@@ -75,7 +75,7 @@ public class Account {
 
 
     public String printCustomer() {
-        return customer.getName() + " " + customer.getEmail();
+        return customer.getFullName() + " " + customer.getEmail();
     }
 
 
